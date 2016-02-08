@@ -7,7 +7,7 @@
 # *It features the following:
 #	- random selection of riddles from a list at the beginning of a new game.
 #	- save/resume feature (save the parameters of your progress in a text file, which allows you to resume the same game later on).
-#   - inventory management, that allows you to pick up, carry and use items.
+#       - inventory management, that allows you to pick up, carry and use items.
 
 import os
 import os.path
@@ -469,8 +469,10 @@ def red_room():
 		
 		if action in ["dwarf", "talk"]:
 			red_passed = dwarf(red_riddle, red_solution, red_passed)
-		elif action == "n":
-			tunnel()			
+		elif action == "n" and red_passed == False:
+			print "The dwarf is in the way."
+		elif action == "n" and red_passed == True:	
+			tunnel()
 		elif action == "s":
 			entrance_hall()
 		elif action == "e":
@@ -510,8 +512,10 @@ def green_room():
 		
 		if action in ["dwarf", "talk"]:
 			green_passed = dwarf(green_riddle, green_solution, green_passed)
-		elif action == "n":
-			flute_room()			
+		elif action == "n" and green_passed == False:
+			print "The dwarf is in the way."
+		elif action == "n" and green_passed == True:	
+			flute_room()
 		elif action == "s":
 			print "There is nothing in this direction."
 		elif action == "e":
@@ -557,7 +561,9 @@ def blue_room():
 			print "There is nothing in this direction."
 		elif action == "e":
 			entrance_hall()
-		elif action =="w":
+		elif action == "w" and blue_passed == False:
+			print "The dwarf is in the way."
+		elif action == "w" and blue_passed == True:	
 			key_room()
 		elif action == "inventory":
 			show_inventory()
@@ -632,7 +638,7 @@ def flute_room():
 		if action in ["flute", "take", "play"] and not ("flute" in inventory):
 			print "You pick up the flute and play a few notes. You are not a bad player!"
 			raw_input("")
-			print "You put the flute in your poutch."
+			print "You put the flute in your pouch."
 			inventory.append("flute")
 		elif action == "n":
 			print "There is nothing in this direction."	
@@ -961,7 +967,7 @@ def lever_room():
 			bridge_down = True
 		elif action in ["lever", "pull"] and bridge_down == True:
 			print "You pull the lever."
-			print "You can hear a the drawbridge moving in the room next door."
+			print "You can hear the drawbridge moving in the room next door."
 			raw_input("")
 			print "The Western door is lifted open."
 			bridge_down = False
